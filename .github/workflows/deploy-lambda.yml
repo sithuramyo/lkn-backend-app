@@ -1,0 +1,31 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches: [ deployment ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install Lambda Tools
+        run: dotnet tool install -g Amazon.Lambda.Tools
+
+      - name: Deploy to AWS Lambda
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-southeast-1
+        run: |
+          dotnet lambda deploy-function YourLambdaFunctionName \
+            --region $AWS_REGION \
+            --function-role YourLambdaExecutionRole \
+            --project-location ./src/LknBackendApp.API \
+            --configuration Release
