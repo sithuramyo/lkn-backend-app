@@ -1,0 +1,52 @@
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Rider and VSCode
+.idea/
+.vscode/
+
+# .NET secrets
+secrets.json
+
+# Auto-generated EF Core Migrations model snapshots
+**/Migrations/*Snapshot.cs
+
+# Environment files
+.env
+.env.*
+
+# Docker volumes
+data/
+initdb/
+
+# Compiled DLLs
+*.dll
+*.exe
+*.pdb
+
+# Publish folder
+publish/
+
+# Test coverage
+TestResults/
+coverage/
+
+# Node_modules if you use JS build tools
+node_modules/
+
+# Docker compose override
+docker-compose.override.yml
