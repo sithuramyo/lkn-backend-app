@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: sithuramyo/lawkanat-backend-app
+      IMAGE_NAME: sithuramyo/lkn-backend-app
       AWS_REGION: ap-southeast-1
       FUNCTION_NAME: lawkanat-backend
 
