@@ -7,9 +7,9 @@ public class MasterCodeItemController(IMasterCodeItemService service) : BaseCont
 {
     [HttpGet]
     [ProducesResponseType(typeof(ResponseModel<PaginationResponse<MasterCodeItemResponseModel>>), StatusCodes.Status200OK)]
-    public async Task<ActionResult> List([FromQuery] PaginationRequest request,[FromQuery] string masterCodeId)
+    public async Task<ActionResult> List([FromQuery] PaginationRequest request, [FromQuery] string masterCodeId)
     {
-        var result = await service.ListAsync(request,masterCodeId);
+        var result = await service.ListAsync(request, masterCodeId);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
 

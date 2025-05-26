@@ -18,7 +18,7 @@ public class GetDeliveryModel
     public string TownshipId { get; set; }
     public decimal DeliveryCost { get; set; }
 }
-public class DeleteDeliveryResponseModel{}
+public class DeleteDeliveryResponseModel { }
 public class DeliveryModel
 {
     public string Id { get; set; }

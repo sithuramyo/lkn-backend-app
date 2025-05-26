@@ -16,7 +16,7 @@ public class WholesaleTotalRevenueResponse
     public decimal Percentage { get; set; }
 }
 
-public class RetailTotalRevenueResponse : WholesaleTotalRevenueResponse {}
+public class RetailTotalRevenueResponse : WholesaleTotalRevenueResponse { }
 
 public class ConsumersResponseModel
 {
@@ -24,7 +24,7 @@ public class ConsumersResponseModel
     public decimal Percentage { get; set; }
 }
 
-public class MerchantsResponseModel : ConsumersResponseModel {}
+public class MerchantsResponseModel : ConsumersResponseModel { }
 
 public class RecentSalesResponseModel
 {

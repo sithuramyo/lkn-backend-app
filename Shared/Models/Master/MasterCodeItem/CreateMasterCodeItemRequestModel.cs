@@ -10,4 +10,4 @@ public class CreateMasterCodeItemRequestModel
     public string? Description { get; set; }
 }
 
-public class UpdateMasterCodeItemRequestModel : CreateMasterCodeItemRequestModel {}
+public class UpdateMasterCodeItemRequestModel : CreateMasterCodeItemRequestModel { }

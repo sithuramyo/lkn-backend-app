@@ -3,7 +3,7 @@ using Shared.Models;
 
 namespace Application.Handlers;
 
-public class ExceptionHandler  : IExceptionHandler
+public class ExceptionHandler : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {

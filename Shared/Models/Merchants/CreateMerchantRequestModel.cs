@@ -11,7 +11,7 @@ public class CreateMerchantRequestModel
     public string StateId { get; set; } = null!;
     [Required(ErrorMessage = "Township is required")]
     public string TownshipId { get; set; } = null!;
-    public string? Description { get; set; } 
+    public string? Description { get; set; }
 }
 
-public class UpdateMerchantRequestModel : CreateMerchantRequestModel{}
+public class UpdateMerchantRequestModel : CreateMerchantRequestModel { }

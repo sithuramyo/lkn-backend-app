@@ -24,17 +24,17 @@ public class WholeSaleService(AppDbContext context) : IWholeSaleService
         query = query.ApplySorting(request.SortBy, request.IsAscending);
 
         var projectedQuery = from mv in query
-            join m in context.Merchants.AsNoTracking() on mv.MerchantCode equals m.MerchantCode
-            select new WholeSaleResponseModel
-            {
-                VoucherCode = mv.VoucherCode,
-                MerchantName = m.Name,
-                VoucherOpenedDate = mv.VoucherOpenedDate,
-                TotalAmount = mv.TotalPrice,
-                LeftAmount = mv.LeftPrice,
-                DepositAmount = mv.TotalPrice - mv.LeftPrice,
-                PaidStatus = mv.PaidStatus
-            };
+                             join m in context.Merchants.AsNoTracking() on mv.MerchantCode equals m.MerchantCode
+                             select new WholeSaleResponseModel
+                             {
+                                 VoucherCode = mv.VoucherCode,
+                                 MerchantName = m.Name,
+                                 VoucherOpenedDate = mv.VoucherOpenedDate,
+                                 TotalAmount = mv.TotalPrice,
+                                 LeftAmount = mv.LeftPrice,
+                                 DepositAmount = mv.TotalPrice - mv.LeftPrice,
+                                 PaidStatus = mv.PaidStatus
+                             };
         var paginated = await projectedQuery.ToPagedListAsync(request);
         return ResponseModel<PaginationResponse<WholeSaleResponseModel>>.Success(paginated);
     }
@@ -56,17 +56,17 @@ public class WholeSaleService(AppDbContext context) : IWholeSaleService
         baseQuery = baseQuery.ApplySorting(request.SortBy, request.IsAscending);
 
         var joinedQuery = from mv in baseQuery
-            join ph in context.MerchantVoucherPaidHistories.AsNoTracking() on mv.VoucherCode equals ph.VoucherCode
-            join pm in context.MasterCodeItems.AsNoTracking() on ph.PaymentMethodId equals pm.Id into pmGroup
-            from pm in pmGroup.DefaultIfEmpty()
-            where pm == null || !pm.IsDeleted
-            select new WholeSaleStatusResponseModel
-            {
-                VoucherCode = mv.VoucherCode,
-                PaymentMethod = pm != null ? pm.Value : null,
-                Amount = ph.PaidAmount,
-                IssueDate = ph.PaidDate
-            };
+                          join ph in context.MerchantVoucherPaidHistories.AsNoTracking() on mv.VoucherCode equals ph.VoucherCode
+                          join pm in context.MasterCodeItems.AsNoTracking() on ph.PaymentMethodId equals pm.Id into pmGroup
+                          from pm in pmGroup.DefaultIfEmpty()
+                          where pm == null || !pm.IsDeleted
+                          select new WholeSaleStatusResponseModel
+                          {
+                              VoucherCode = mv.VoucherCode,
+                              PaymentMethod = pm != null ? pm.Value : null,
+                              Amount = ph.PaidAmount,
+                              IssueDate = ph.PaidDate
+                          };
 
         var paginated = await joinedQuery.ToPagedListAsync(request);
         return ResponseModel<PaginationResponse<WholeSaleStatusResponseModel>>.Success(paginated);
@@ -174,20 +174,20 @@ public class WholeSaleService(AppDbContext context) : IWholeSaleService
         }
 
         var merchantProducts = await (from v in context.MerchantVoucherProducts
-            join p in context.Products on v.ProductCode equals p.ProductCode
-            where v.VoucherCode == voucherCode
-            select new WholeSaleVoucherList
-            {
-                No = 0,
-                ProductName = p.Name,
-                Color = context.MasterCodeItems
-                    .Where(x => x.Id == v.ColorId)
-                    .Select(x => x.Value)
-                    .FirstOrDefault(),
-                Price = v.ProductPrice,
-                Quantity = v.ProductQuantity,
-                Amount = v.ProductPrice * v.ProductQuantity
-            }).ToListAsync();
+                                      join p in context.Products on v.ProductCode equals p.ProductCode
+                                      where v.VoucherCode == voucherCode
+                                      select new WholeSaleVoucherList
+                                      {
+                                          No = 0,
+                                          ProductName = p.Name,
+                                          Color = context.MasterCodeItems
+                                              .Where(x => x.Id == v.ColorId)
+                                              .Select(x => x.Value)
+                                              .FirstOrDefault(),
+                                          Price = v.ProductPrice,
+                                          Quantity = v.ProductQuantity,
+                                          Amount = v.ProductPrice * v.ProductQuantity
+                                      }).ToListAsync();
 
 
         for (var i = 0; i < merchantProducts.Count; i++)

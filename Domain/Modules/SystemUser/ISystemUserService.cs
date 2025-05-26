@@ -3,7 +3,7 @@ using Shared.Models.SystemUser;
 
 namespace Domain.Modules.SystemUser;
 
-public interface ISystemUserService : ICrudWrapper<SystemUserResponseModel,CreateSystemUserRequestModel,UpdateSystemUserRequestModel>
+public interface ISystemUserService : ICrudWrapper<SystemUserResponseModel, CreateSystemUserRequestModel, UpdateSystemUserRequestModel>
 {
-    
+
 }

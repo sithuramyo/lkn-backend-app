@@ -14,7 +14,7 @@ public class BundleCategoryListModel
     public string BundleName { get; set; }
     public string BundleDescription { get; set; }
     public int CategoryCount { get; set; }
-    
+
 }
 
 public class BundleCategoryModel
@@ -53,4 +53,4 @@ public class BundleCategoryStockDetails
     public decimal StockPrice { get; set; }
     public string StockDescription { get; set; }
 }
-public class DeleteBundleCategoryResponseModel{}
+public class DeleteBundleCategoryResponseModel { }

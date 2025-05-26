@@ -2,12 +2,12 @@
 
 public class OpenPurchaseOrderResponseModel
 {
-    
+
 }
 
 public class PurchaseOrderResponseModel
 {
-    
+
 }
 
 public class DeliveryCostResponseModel

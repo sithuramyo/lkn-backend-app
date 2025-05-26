@@ -21,21 +21,21 @@ public class MerchantService(AppDbContext context) : IMerchantService
         query = query.ApplySorting(request.SortBy, request.IsAscending);
 
         var projectedQuery = from m in query
-            join state in context.MasterCodes.AsNoTracking() on m.StateId equals state.Id into stateGroup
-            from state in stateGroup.DefaultIfEmpty()
-            join township in context.MasterCodeItems.AsNoTracking() on m.TownShipId equals township.Id into
-                townshipGroup
-            from township in townshipGroup.DefaultIfEmpty()
-            select new MerchantResponseModel
-            {
-                Id = m.Id,
-                Name = m.Name,
-                MerchantCode = m.MerchantCode,
-                PhoneNumber = m.PhoneNumber,
-                State = state != null ? state.Name + "/" + state.NameMM : null,
-                Township = township != null ? township.Value + "/" + township.ValueMM : null,
-                Description = m.Description
-            };
+                             join state in context.MasterCodes.AsNoTracking() on m.StateId equals state.Id into stateGroup
+                             from state in stateGroup.DefaultIfEmpty()
+                             join township in context.MasterCodeItems.AsNoTracking() on m.TownShipId equals township.Id into
+                                 townshipGroup
+                             from township in townshipGroup.DefaultIfEmpty()
+                             select new MerchantResponseModel
+                             {
+                                 Id = m.Id,
+                                 Name = m.Name,
+                                 MerchantCode = m.MerchantCode,
+                                 PhoneNumber = m.PhoneNumber,
+                                 State = state != null ? state.Name + "/" + state.NameMM : null,
+                                 Township = township != null ? township.Value + "/" + township.ValueMM : null,
+                                 Description = m.Description
+                             };
 
         var paginated = await projectedQuery.ToPagedListAsync(request);
         return ResponseModel<PaginationResponse<MerchantResponseModel>>.Success(paginated);
@@ -51,9 +51,9 @@ public class MerchantService(AppDbContext context) : IMerchantService
         {
             return ResponseModel<NoResponseModel>.BadRequest("Phone number is already exist");
         }
-        
+
         var count = await context.Merchants.CountAsync();
-        
+
         Persistence.DataModels.Setup.Merchant data = new()
         {
             Id = Guid.NewGuid().ToString(),
@@ -99,13 +99,13 @@ public class MerchantService(AppDbContext context) : IMerchantService
         var isPhoneExist = await context.Merchants
             .AnyAsync(x => x.PhoneNumber == request.PhoneNumber
                            && x.Id != id && !x.IsDeleted);
-        
+
         if (isPhoneExist)
         {
             return ResponseModel<NoResponseModel>.BadRequest("Phone number already exist");
         }
-        
-        
+
+
         data.Name = request.Name;
         data.PhoneNumber = request.PhoneNumber;
         data.StateId = request.StateId;

@@ -7,5 +7,5 @@ public class CreateDeliveryRequestModel
     public decimal DeliveryCost { get; set; }
 }
 
-public class UpdateDeliveryRequestModel : CreateDeliveryRequestModel {}
+public class UpdateDeliveryRequestModel : CreateDeliveryRequestModel { }
 

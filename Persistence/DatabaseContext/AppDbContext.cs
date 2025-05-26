@@ -14,7 +14,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public virtual DbSet<Admin> Admins { get; set; }
     public virtual DbSet<Consumer> Consumers { get; set; }
     #endregion
-    
+
     #region Admintration Management System
     public virtual DbSet<MasterCode> MasterCodes { get; set; }
     public virtual DbSet<MasterCodeItem> MasterCodeItems { get; set; }
@@ -23,7 +23,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public virtual DbSet<ProductColor> ProductColors { get; set; }
     public virtual DbSet<Delivery> Deliveries { get; set; }
     #endregion
-    
+
     #region E-commerce Management System
     public virtual DbSet<Stock> Stocks { get; set; }
     public virtual DbSet<Category> Categories { get; set; }
@@ -34,7 +34,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public virtual DbSet<DeveloperCommission> DeveloperCommissions { get; set; }
     public virtual DbSet<DeveloperCommissionClaim> DeveloperCommissionClaims { get; set; }
     #endregion
-    
+
     #region Voucher Management System
     public virtual DbSet<MerchantVoucher> MerchantVouchers { get; set; }
     public virtual DbSet<MerchantVoucherProduct> MerchantVoucherProducts { get; set; }

@@ -22,27 +22,27 @@ public class ProductService(AppDbContext context) : IProductService
         baseQuery = baseQuery.ApplySorting(request.SortBy, request.IsAscending);
 
         var projectedQuery = from p in baseQuery
-            join size in context.MasterCodeItems on p.SizeId equals size.Id into sizeGroup
-            from size in sizeGroup.DefaultIfEmpty()
-            join pkg in context.MasterCodeItems on p.PackagingId equals pkg.Id into pkgGroup
-            from pkg in pkgGroup.DefaultIfEmpty()
-            join madeIn in context.MasterCodeItems on p.MadeInId equals madeIn.Id into madeInGroup
-            from madeIn in madeInGroup.DefaultIfEmpty()
-            join pc in context.ProductColors on p.Id equals pc.ProductId into pcGroup
-            from pc in pcGroup.DefaultIfEmpty()
-            join color in context.MasterCodeItems on pc.ColorId equals color.Id into colorGroup
-            from color in colorGroup.DefaultIfEmpty()
-            select new
-            {
-                p.Id,
-                p.ProductCode,
-                p.Name,
-                p.Price,
-                Size = size.Value,
-                PackageType = pkg.Value,
-                MadeIn = madeIn.Value,
-                Color = color.Value
-            };
+                             join size in context.MasterCodeItems on p.SizeId equals size.Id into sizeGroup
+                             from size in sizeGroup.DefaultIfEmpty()
+                             join pkg in context.MasterCodeItems on p.PackagingId equals pkg.Id into pkgGroup
+                             from pkg in pkgGroup.DefaultIfEmpty()
+                             join madeIn in context.MasterCodeItems on p.MadeInId equals madeIn.Id into madeInGroup
+                             from madeIn in madeInGroup.DefaultIfEmpty()
+                             join pc in context.ProductColors on p.Id equals pc.ProductId into pcGroup
+                             from pc in pcGroup.DefaultIfEmpty()
+                             join color in context.MasterCodeItems on pc.ColorId equals color.Id into colorGroup
+                             from color in colorGroup.DefaultIfEmpty()
+                             select new
+                             {
+                                 p.Id,
+                                 p.ProductCode,
+                                 p.Name,
+                                 p.Price,
+                                 Size = size.Value,
+                                 PackageType = pkg.Value,
+                                 MadeIn = madeIn.Value,
+                                 Color = color.Value
+                             };
 
         var grouped = projectedQuery
             .GroupBy(p => new

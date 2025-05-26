@@ -76,12 +76,12 @@ public class SystemUserService(AppDbContext context) : ISystemUserService
 
         var isExist = await context.Admins
             .AnyAsync(x => x.Email == request.Email && x.Id != id && !x.IsDeleted);
-        
+
         if (isExist)
         {
             return ResponseModel<NoResponseModel>.BadRequest("Email already exist");
         }
-        
+
         data.Name = request.Name;
         data.Email = request.Email;
         data.Password = string.IsNullOrEmpty(request.Password) ? data.Password : PasswordHelper.HashPassword(request.Password);

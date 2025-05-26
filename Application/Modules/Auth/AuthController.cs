@@ -18,21 +18,21 @@ public class AuthController(IAuthService service) : ControllerBase
         var result = await service.AdminLoginAsync(request.Request);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
-    
+
     [HttpPost("consumer-login")]
     public async Task<IActionResult> ConsumerLogin(RequestModel<LoginRequestModel> request)
     {
         var result = await service.ConsumerLoginAsync(request.Request);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
-    
+
     [HttpPost("consumer-social-login")]
     public async Task<IActionResult> ConsumerSocialLogin(RequestModel<SocialLoginRequestModel> request)
     {
         var result = await service.ConsumerSocialLoginAsync(request.Request);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
-    
+
     [Authorize]
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()

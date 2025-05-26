@@ -20,7 +20,7 @@ public static class MethodExtensions
             else
             {
                 matchedVouchers.Add(voucher);
-                inputValue -= voucher.LeftAmount;  
+                inputValue -= voucher.LeftAmount;
             }
         }
 

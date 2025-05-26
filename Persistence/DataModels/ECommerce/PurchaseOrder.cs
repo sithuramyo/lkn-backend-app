@@ -8,7 +8,7 @@ public class PurchaseOrder : BaseDataModel
     public bool IncludeBundle { get; set; }
     [Column(TypeName = "timestamp without time zone")]
     public DateTime OrderDate { get; set; }
-    
+
     public string ShippingAddressId { get; set; }
     public string ShippingAddressDetail { get; set; }
     public bool IsOrderAccepted { get; set; }

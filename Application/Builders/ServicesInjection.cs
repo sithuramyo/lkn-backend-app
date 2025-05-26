@@ -16,7 +16,7 @@ public static class ServicesInjection
         #region Token Helper
         services.AddScoped<TokenHelper>();
         #endregion
-        
+
         #region Services Injection
 
         services.AddScoped<IAuthService, AuthService>();

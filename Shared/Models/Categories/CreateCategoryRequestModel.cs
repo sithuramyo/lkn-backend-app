@@ -6,7 +6,7 @@ public class CreateCategoryRequestModel
     public string Description { get; set; }
 }
 
-public class UpdateCategoryRequestModel : CreateCategoryRequestModel {}
+public class UpdateCategoryRequestModel : CreateCategoryRequestModel { }
 
 public class UpdateCategoryOrderRequestModel
 {

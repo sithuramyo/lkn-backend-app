@@ -4,7 +4,7 @@ public class DeveloperCommissionListResponseModel
 {
     public List<DeveloperCommissionModel> DeveloperCommissions { get; set; }
 }
-public class DeveloperCommissionResponseModel{}
+public class DeveloperCommissionResponseModel { }
 public class DeveloperCommissionModel
 {
     public string PurchaseOrderNumber { get; set; }

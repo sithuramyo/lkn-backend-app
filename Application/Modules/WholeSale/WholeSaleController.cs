@@ -13,20 +13,20 @@ public class WholeSaleController(IWholeSaleService service) : BaseController
         var result = await service.GetWholeSaleVouchersAsync(request);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
-    
+
     [HttpGet("whole-sale-voucher-status")]
     [ProducesResponseType(typeof(ResponseModel<PaginationResponse<WholeSaleStatusResponseModel>>), StatusCodes.Status200OK)]
-    public async Task<ActionResult> List([FromQuery] PaginationRequest request,[FromQuery] PaidStage status)
+    public async Task<ActionResult> List([FromQuery] PaginationRequest request, [FromQuery] PaidStage status)
     {
-        var result = await service.GetWholeSaleVouchersStatusAsync(request,status);
+        var result = await service.GetWholeSaleVouchersStatusAsync(request, status);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
-    
+
     [HttpGet("detail")]
     [ProducesResponseType(typeof(ResponseModel<PaginationResponse<WholeSaleDetailResponseModel>>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMerchantVoucherDetailList([FromQuery] PaginationRequest request,[FromQuery] string voucherCode)
+    public async Task<IActionResult> GetMerchantVoucherDetailList([FromQuery] PaginationRequest request, [FromQuery] string voucherCode)
     {
-        var result = await service.GetWholeSaleVoucherDetailsAsync(request,voucherCode);
+        var result = await service.GetWholeSaleVoucherDetailsAsync(request, voucherCode);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
 
@@ -45,7 +45,7 @@ public class WholeSaleController(IWholeSaleService service) : BaseController
         var result = await service.PayableWholeSaleVoucherAsync(request);
         return result.IsSuccess ? Ok(result) : StatusCode(result.StatusCode, result);
     }
-    
+
     [HttpGet("generate-merchant-voucher/{voucherCode}")]
     [ProducesResponseType(typeof(ResponseModel<GenerateWholeSaleVoucherResponseModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GenerateWholeSaleVoucher(string voucherCode)

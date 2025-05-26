@@ -6,7 +6,7 @@ public class OpenPurchaseOrderRequestModel
     public decimal TotalAmount { get; set; }
     public List<StockModel> Stocks { get; set; }
     public bool IncludeBundle { get; set; }
-    public string[] BundleId{ get; set; }
+    public string[] BundleId { get; set; }
     public string ShippingAddressId { get; set; }
     public string ShippingAddressDetail { get; set; }
     public string DeliveryAmountId { get; set; }
@@ -15,7 +15,7 @@ public class OpenPurchaseOrderRequestModel
 public class AcceptPurchaseOrderRequestModel
 {
     public string PurchaseOrderNumber { get; set; }
-    public bool IsAccept {get;set;}
+    public bool IsAccept { get; set; }
 }
 
 

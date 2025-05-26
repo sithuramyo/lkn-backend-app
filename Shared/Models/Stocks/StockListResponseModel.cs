@@ -10,7 +10,7 @@ public class StockResponseModel
     public StockModel Stock { get; set; } = new();
 }
 
-public class DeleteStockResponseModel{}
+public class DeleteStockResponseModel { }
 
 public class StockListModel
 {

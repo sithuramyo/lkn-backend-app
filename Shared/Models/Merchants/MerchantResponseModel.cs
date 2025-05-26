@@ -15,5 +15,5 @@ public class MerchantResponseModel
     public string? Township { get; set; }
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? TownshipId { get; set; }
-    public string? Description { get; set; } 
+    public string? Description { get; set; }
 }

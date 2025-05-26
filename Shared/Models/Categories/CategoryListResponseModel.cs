@@ -9,7 +9,7 @@ public class CategoryResponseModel
 {
     public CategoryModel Category { get; set; } = new();
 }
-public class DeleteCategoryResponseModel{}
+public class DeleteCategoryResponseModel { }
 public class CategoryModel
 {
     public string Id { get; set; }

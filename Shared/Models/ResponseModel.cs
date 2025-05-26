@@ -26,31 +26,31 @@ public class ResponseModel<T>
     public static ResponseModel<T> Created(string message)
     {
         return new ResponseModel<T>
-            { IsSuccess = true, Message = $"{message} is created" };
+        { IsSuccess = true, Message = $"{message} is created" };
     }
 
     public static ResponseModel<T> Updated(string message)
     {
         return new ResponseModel<T>
-            { IsSuccess = true, Message = $"{message} is updated" };
+        { IsSuccess = true, Message = $"{message} is updated" };
     }
 
     public static ResponseModel<T> Deleted(string message)
     {
         return new ResponseModel<T>
-            { IsSuccess = true, Message = $"{message} is deleted" };
+        { IsSuccess = true, Message = $"{message} is deleted" };
     }
 
     public static ResponseModel<T> BadRequest(string message)
     {
         return new ResponseModel<T>
-            { IsSuccess = false, Message = message, StatusCode = (int)HttpStatusCode.BadRequest };
+        { IsSuccess = false, Message = message, StatusCode = (int)HttpStatusCode.BadRequest };
     }
 
     public static ResponseModel<T> Conflict(string message)
     {
         return new ResponseModel<T>
-            { IsSuccess = false, Message = message, StatusCode = (int)HttpStatusCode.Conflict };
+        { IsSuccess = false, Message = message, StatusCode = (int)HttpStatusCode.Conflict };
     }
 
     public static ResponseModel<T> NotFound(string message)

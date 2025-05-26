@@ -3,7 +3,7 @@ using Shared.Models.Products;
 
 namespace Domain.Modules.Product;
 
-public interface IProductService : ICrudWrapper<ProductResponseModel,CreateProductRequestModel, UpdateProductRequestModel>
+public interface IProductService : ICrudWrapper<ProductResponseModel, CreateProductRequestModel, UpdateProductRequestModel>
 {
-    
+
 }
