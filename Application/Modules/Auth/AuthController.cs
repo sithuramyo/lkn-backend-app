@@ -2,8 +2,6 @@
 using System.Security.Claims;
 using Domain.Modules.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
 using Shared.Models.Auth;
 
 namespace Application.Modules.Auth;

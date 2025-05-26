@@ -12,10 +12,10 @@ public static class BooleanExtensions
         }
         return parsedRole switch
         {
-            AdminRole.SUPERADMIN => true,
-            AdminRole.ADMIN => true,
-            AdminRole.RETAIL => true,
-            AdminRole.WHOLESALE => true,
+            AdminRole.SuperAdmin => true,
+            AdminRole.Admin => true,
+            AdminRole.Retail => true,
+            AdminRole.WholeSale => true,
             _ => false
         };
     }
