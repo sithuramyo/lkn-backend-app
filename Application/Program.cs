@@ -14,22 +14,16 @@ using Persistence.Builders;
 using Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var url = "http://localhost:5000";
-if (builder.Environment.IsProduction())
-{
-    url = "http://0.0.0.0:5000";
-}
-
-builder.WebHost.UseUrls(url);
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 var jwtAudience = builder.Configuration["Jwt:Audience"];
 var jwtSecret = builder.Configuration["Jwt:Secret"];
-
+var allowedOrigins = builder.Configuration.GetSection("Origins:AllowedOrigins").Get<string[]>() ?? [];
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret!));
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -84,9 +78,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policyBuilder =>
     {
-        policyBuilder.WithOrigins(
-                "http://localhost:3000"
-            )
+        policyBuilder.WithOrigins(allowedOrigins)
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
