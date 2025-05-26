@@ -2,7 +2,10 @@ name: Pull Request Build & Test
 
 on:
   pull_request:
-    branches: [ development ]
+    branches:
+      - development
+      - deployment
+    
 
 jobs:
   build-and-test:
@@ -16,10 +19,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore ./src/LknBackendApp.API
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build ./src/LknBackendApp.API --no-restore --configuration Release
+        run: dotnet test --no-build --configuration Release --logger trx --results-directory TestResults
 
       - name: Test
         run: dotnet test ./tests/LknBackendApp.UnitTests --no-restore --verbosity normal
+
+      - name: Code Quality Check
+        run: dotnet format student-management-app-backend.sln --verify-no-changes
