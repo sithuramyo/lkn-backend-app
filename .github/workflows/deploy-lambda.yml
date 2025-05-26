@@ -1,31 +1,39 @@
-name: Deploy to AWS Lambda
+name: Deploy Lambda with Docker Image
 
 on:
   push:
-    branches: [ deployment ]
+    tags:
+      - "v*"  # Match tags like v1.0.0, v2.3.1
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_NAME: your-dockerhub-username/lkn-backend-lambda
+      AWS_REGION: ap-southeast-1
+      FUNCTION_NAME: your-lambda-function-name
+
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Install Lambda Tools
-        run: dotnet tool install -g Amazon.Lambda.Tools
+      - name: Build Docker image
+        run: |
+          docker build -t $IMAGE_NAME:${{ github.ref_name }} .
+
+      - name: Push Docker image
+        run: |
+          docker push $IMAGE_NAME:${{ github.ref_name }}
 
       - name: Deploy to AWS Lambda
+        uses: aws-actions/aws-lambda-deploy@v1
+        with:
+          function-name: ${{ env.FUNCTION_NAME }}
+          image-uri: $IMAGE_NAME:${{ github.ref_name }}
+          region: ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-southeast-1
-        run: |
-          dotnet lambda deploy-function YourLambdaFunctionName \
-            --region $AWS_REGION \
-            --function-role YourLambdaExecutionRole \
-            --project-location ./src/LknBackendApp.API \
-            --configuration Release
