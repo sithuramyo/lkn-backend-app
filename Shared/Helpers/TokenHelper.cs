@@ -42,7 +42,7 @@ public class TokenHelper(IConfiguration config)
         };
 
         if (!string.IsNullOrEmpty(role))
-            claims.Add(new Claim(ClaimTypes.Role, role));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Typ, role));
 
         var token = new JwtSecurityToken(
             issuer: issuer,
