@@ -7,3 +7,8 @@ public class MasterCodeItemResponseModel
     public string ValueMM { get; set; }
     public string Description { get; set; }
 }
+
+public class MasterCodeItemsResponseModel
+{
+    public List<MasterCodeItemResponseModel> MasterCodeItems { get; set; } = [];
+}

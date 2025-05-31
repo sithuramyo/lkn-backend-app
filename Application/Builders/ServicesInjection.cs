@@ -1,4 +1,5 @@
 ﻿using Domain.Modules.Auth;
+using Domain.Modules.Common;
 using Domain.Modules.Master.MasterCode;
 using Domain.Modules.Master.MasterCodeItem;
 using Domain.Modules.Merchant;
@@ -26,6 +27,7 @@ public static class ServicesInjection
         services.AddScoped<IMerchantService, MerchantService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IWholeSaleService, WholeSaleService>();
+        services.AddScoped<ICommonService, CommonService>();
 
         #endregion
     }
