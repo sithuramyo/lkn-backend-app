@@ -12,8 +12,8 @@ public class MasterCodeItemService(AppDbContext context) : IMasterCodeItemServic
         if (!string.IsNullOrWhiteSpace(request.Search))
         {
             query = query.Where(d =>
-                EF.Functions.ILike(d.Value, $"%{request.Search}%") ||
-                EF.Functions.ILike(d.ValueMM, $"%{request.Search}%"));
+                d.ValueMM != null && (EF.Functions.ILike(d.Value, $"%{request.Search}%") ||
+                                      EF.Functions.ILike(d.ValueMM, $"%{request.Search}%")));
         }
 
         query = query.ApplySorting(request.SortBy, request.IsAscending);
@@ -22,8 +22,8 @@ public class MasterCodeItemService(AppDbContext context) : IMasterCodeItemServic
         {
             Id = d.Id,
             Value = d.Value,
-            ValueMM = d.ValueMM,
-            Description = d.Description,
+            ValueMM = d.ValueMM ?? string.Empty,
+            Description = d.Description ?? string.Empty,
         });
 
         var paginated = await projectedQuery.ToPagedListAsync(request);
