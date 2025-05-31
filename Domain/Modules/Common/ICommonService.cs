@@ -4,6 +4,6 @@ namespace Domain.Modules.Common;
 
 public interface ICommonService
 {
-    Task<ResponseModel<MasterCodeItemsResponseModel>> MasterCodeListAsync(MasterCodeItemRequestModel request);
+    Task<ResponseModel<List<MasterCodeItemResponseModel>>> MasterCodeListAsync(MasterCodeItemRequestModel request);
 
 }
