@@ -4,9 +4,9 @@ namespace Domain.Modules.Common;
 
 public class CommonService(AppDbContext context) : ICommonService
 {
-    public async Task<ResponseModel<MasterCodeItemsResponseModel>> MasterCodeListAsync(MasterCodeItemRequestModel request)
+    public async Task<ResponseModel<List<MasterCodeItemResponseModel>>> MasterCodeListAsync(MasterCodeItemRequestModel request)
     {
-        MasterCodeItemsResponseModel response = new();
+        List<MasterCodeItemResponseModel> response = [];
         var masterCodeIds = await context.MasterCodes.Where(x => request.Type.Contains(x.Type)).Select(x => x.Id).ToListAsync();
         var masterCodeItems = context.MasterCodeItems
             .Where(x => masterCodeIds.Contains(x.Id))
@@ -18,7 +18,7 @@ public class CommonService(AppDbContext context) : ICommonService
                 Description = x.Description ?? string.Empty,
             })
             .ToList();
-        response.MasterCodeItems = masterCodeItems;
-        return ResponseModel<MasterCodeItemsResponseModel>.Success(response);
+        response = masterCodeItems;
+        return ResponseModel<List<MasterCodeItemResponseModel>>.Success(response);
     }
 }
