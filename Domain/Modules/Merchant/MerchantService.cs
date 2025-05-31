@@ -32,8 +32,8 @@ public class MerchantService(AppDbContext context) : IMerchantService
                                  Name = m.Name,
                                  MerchantCode = m.MerchantCode,
                                  PhoneNumber = m.PhoneNumber,
-                                 State = state != null ? state.Name + "/" + state.NameMM : null,
-                                 Township = township != null ? township.Value + "/" + township.ValueMM : null,
+                                 State = state != null ? state.Name + "-" + state.NameMM : null,
+                                 Township = township != null ? township.Value + "-" + township.ValueMM : null,
                                  Description = m.Description
                              };
 
