@@ -21,7 +21,7 @@ public class CommonService(AppDbContext context) : ICommonService
 
     public async Task<ResponseModel<List<MasterCodeItemResponseModel>>> MasterCodeItemsListAsync(string masterCodeId)
     {
-        var masterCodeItems = await context.MasterCodeItems.Where(x => x.Id == masterCodeId)
+        var masterCodeItems = await context.MasterCodeItems.Where(x => x.MasterCodeId == masterCodeId)
             .Select(x => new MasterCodeItemResponseModel
             {
                 Id = x.Id,
