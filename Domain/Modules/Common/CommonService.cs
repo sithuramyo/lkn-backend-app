@@ -11,7 +11,7 @@ public class CommonService(AppDbContext context) : ICommonService
         var masterCodes = await context.MasterCodes.Where(x => request.Types.Contains(x.Type))
             .Select(x => new MasterCodeResponseModel
             {
-                Id   = x.Id,
+                Id = x.Id,
                 Name = x.Name,
                 NameMM = x.NameMM ?? string.Empty,
                 Description = x.Description ?? string.Empty,
@@ -24,7 +24,7 @@ public class CommonService(AppDbContext context) : ICommonService
         var masterCodeItems = await context.MasterCodeItems.Where(x => x.Id == masterCodeId)
             .Select(x => new MasterCodeItemResponseModel
             {
-                Id   = x.Id,
+                Id = x.Id,
                 Value = x.Value,
                 ValueMM = x.ValueMM ?? string.Empty,
                 Description = x.Description ?? string.Empty,
